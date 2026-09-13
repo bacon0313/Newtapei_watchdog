@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Watchdog · 架構圖</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #0a0e1a;
+    --panel: #111b35;
+    --border: #24356b;
+    --border-hi: #3a5bd4;
+    --text: #e2ebff;
+    --dim: #9bb4e8;
+    --blue: #5b7bff;
+    --purple: #8b5cf6;
+    --green: #22c55e;
+    --orange: #f97316;
+    --cyan: #22d3ee;
+  }
+  html, body {
+    height: 100%;
+    background: #05070f;
+    font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+    color: var(--text);
+    overflow: hidden;
+  }
+  .viewport { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .stage {
+    width: 1600px; height: 900px;
+    background: var(--bg);
+    padding: 56px 70px;
+    display: flex; flex-direction: column;
+    transform-origin: center center;
+    box-shadow: 0 0 60px rgba(0,0,0,.6);
+    overflow: hidden;
+  }
+
+  .title { text-align: center; margin-bottom: 20px; }
+  .title h1 { font-size: 3.4rem; color: #cfe0ff; letter-spacing: 1.5px; }
+  .title p { color: var(--dim); font-size: 1.6rem; margin-top: 12px; }
+
+  /* 主流程橫向排列 */
+  .flow {
+    flex: 1 1 auto;
+    display: flex; align-items: center; justify-content: center;
+    gap: 0;
+  }
+
+  /* 節點盒 */
+  .node {
+    width: 300px;
+    background: var(--panel);
+    border: 3px solid var(--border);
+    border-radius: 22px;
+    padding: 40px 22px;
+    text-align: center;
+    box-shadow: 0 8px 26px rgba(0,0,0,.35);
+  }
+  .node .ic { font-size: 5rem; line-height: 1; }
+  .node h3 { font-size: 2rem; margin-top: 20px; color: #eaf1ff; }
+  .node .sub { font-size: 1.35rem; color: var(--dim); margin-top: 10px; }
+
+  .node.ui    { border-color: var(--blue);   box-shadow: 0 0 30px rgba(91,123,255,.28); }
+  .node.aws   { border-color: var(--orange); box-shadow: 0 0 30px rgba(249,115,22,.24); }
+  .node.ml    { border-color: var(--purple); box-shadow: 0 0 30px rgba(139,92,246,.28); }
+  .node.out   { border-color: var(--green);  box-shadow: 0 0 30px rgba(34,197,94,.24); }
+
+  /* 箭頭 */
+  .arrow {
+    flex: 0 0 auto;
+    color: var(--border-hi);
+    font-size: 4rem;
+    padding: 0 14px;
+  }
+
+  /* 服務堆疊（中段的三個 AWS/AI 服務直向排列） */
+  .stack { display: flex; flex-direction: column; gap: 22px; }
+  .chip {
+    width: 400px;
+    display: flex; align-items: center; gap: 22px;
+    background: var(--panel);
+    border: 3px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 28px;
+  }
+  .chip .ic { font-size: 3.2rem; }
+  .chip .txt h4 { font-size: 1.7rem; color: #eaf1ff; }
+  .chip .txt span { font-size: 1.2rem; color: var(--dim); }
+  .chip.s3   { border-left: 9px solid var(--orange); }
+  .chip.ml   { border-left: 9px solid var(--purple); }
+  .chip.ext  { border-left: 9px solid var(--cyan); }
+
+  /* 底部風險條 */
+  .risk-bar {
+    flex: 0 0 auto;
+    display: flex; gap: 22px; justify-content: center;
+    margin-top: 34px;
+  }
+  .rc {
+    width: 250px; text-align: center;
+    border: 3px solid; border-radius: 18px;
+    padding: 20px; background: #0f1730;
+  }
+  .rc .em { font-size: 2.8rem; }
+  .rc .nm { font-size: 1.5rem; font-weight: 700; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <div class="title">
+      <h1>🛡️ Smart Watchdog 運作架構</h1>
+      <p>非營利幼兒園 · 智慧風險預警</p>
+    </div>
+
+    <!-- 主流程 -->
+    <div class="flow">
+
+      <div class="node ui">
+        <div class="ic">🧑‍💼</div>
+        <h3>使用者</h3>
+        <div class="sub">Streamlit 儀表板</div>
+      </div>
+
+      <div class="arrow">➜</div>
+
+      <!-- 中段：AWS 服務堆疊 -->
+      <div class="stack">
+        <div class="chip s3">
+          <div class="ic">🪣</div>
+          <div class="txt"><h4>Amazon S3</h4><span>財報 PDF · 資料湖</span></div>
+        </div>
+        <div class="chip ml">
+          <div class="ic">👁️</div>
+          <div class="txt"><h4>Bedrock Claude</h4><span>讀 PDF · 萃取財務數字</span></div>
+        </div>
+        <div class="chip ext">
+          <div class="ic">⚖️</div>
+          <div class="txt"><h4>教保資訊網</h4><span>裁罰紀錄查詢</span></div>
+        </div>
+      </div>
+
+      <div class="arrow">➜</div>
+
+      <div class="node ml">
+        <div class="ic">🎯</div>
+        <h3>SageMaker</h3>
+        <div class="sub">XGBoost 風險評分</div>
+      </div>
+
+      <div class="arrow">➜</div>
+
+      <div class="node out">
+        <div class="ic">📊</div>
+        <h3>風險報告</h3>
+        <div class="sub">評級 · AI 審計建議</div>
+      </div>
+
+    </div>
+
+    <!-- 風險等級 -->
+    <div class="risk-bar">
+      <div class="rc" style="border-color:#22c55e"><div class="em">🟢</div><div class="nm">低風險</div></div>
+      <div class="rc" style="border-color:#eab308"><div class="em">🟡</div><div class="nm">注意</div></div>
+      <div class="rc" style="border-color:#f97316"><div class="em">🟠</div><div class="nm">高風險</div></div>
+      <div class="rc" style="border-color:#ef4444"><div class="em">🔴</div><div class="nm">極高風險</div></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function fit() {
+    var stage = document.getElementById('stage');
+    // 等比縮放：填滿視窗（可放大也可縮小），保持 16:9 完整顯示
+    var scale = Math.min(window.innerWidth / 1600, window.innerHeight / 900);
+    stage.style.transform = 'scale(' + scale + ')';
+  }
+  window.addEventListener('resize', fit);
+  fit();
+</script>
+</body>
+</html>

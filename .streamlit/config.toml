@@ -1,0 +1,11 @@
+[theme]
+# 固定為深色主題，避免跟隨瀏覽器（Chrome 深色主題）導致文字變深色看不見
+base = "dark"
+primaryColor = "#5b7bff"
+backgroundColor = "#0a0e1a"
+secondaryBackgroundColor = "#111b35"
+textColor = "#e6eeff"
+font = "sans serif"
+
+[server]
+headless = true

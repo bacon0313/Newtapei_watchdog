@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>按鈕頁面</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    button {
+      padding: 16px 48px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      background-color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    button:hover {
+      background-color: #ccc;
+    }
+
+    #message {
+      font-size: 36px;
+      font-weight: bold;
+      color: #fff;
+      min-height: 48px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button onclick="showMessage()">按我</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').textContent = '正常';
+    }
+  </script>
+</body>
+</html>

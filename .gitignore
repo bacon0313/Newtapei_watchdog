@@ -1,0 +1,56 @@
+# ── Python ───────────────────────────────────────────────
+.venv/
+__pycache__/
+*.pyc
+
+# ── 機密 / 憑證（絕不上傳）────────────────────────────────
+_creds.ps1
+_load_creds.py
+aws_result.txt
+*.pem
+*.key
+.aws/
+
+# ── 一次性除錯 / 執行輸出檔 ──────────────────────────────
+*_out.txt
+*_err.txt
+*.txt
+
+# ── 資料檔（含財務數據，不公開）──────────────────────────
+train.csv
+
+# ── 一次性部署 / 除錯 / 探索腳本（含 IP、instance ID 等內部資訊）──
+deploy_and_invoke.py
+deploy_ec2.py
+deploy_s3.py
+redeploy_app.py
+retrain_and_update.py
+describe_job.py
+verify_aws.py
+verify_endpoint.py
+verify_pkg.py
+watch_training.py
+watch_deploy2.py
+watch_deploy3.py
+check_s3_train.py
+check_status.py
+check_textract.py
+check_textract2.py
+sg_check.py
+ssm_fix2.py
+extract_and_upload.py
+list_s3.py
+list_s3_utf8.py
+parse_pdf_anxie.py
+bedrock_read_anxie.py
+bedrock_read_anxie2.py
+textract_anxie.py
+test_kb.py
+test_kb2.py
+test_kb3.py
+query_anxie.py
+query_anxie2.py
+query_anxie3.py
+train.py
+
+# 注意：不要把 .kiro/ 加入這裡（比賽規則要求 .kiro 必須上傳）
