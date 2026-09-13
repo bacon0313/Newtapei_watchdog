@@ -11,7 +11,7 @@
 
 ## 技術架構
 - 前端：Streamlit（`app.py`），部署於 AWS EC2。
-- AWS：S3（財報 / 快取）、Bedrock Claude（視覺解析 PDF、審計建議）、
+- AWS：S3（財報 / 快取）、視覺解析 PDF、審計建議、
   SageMaker XGBoost（4 級風險評分 Endpoint）。
 - 外部：全國教保資訊網裁罰紀錄查詢。
 
